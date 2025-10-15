@@ -1,7 +1,16 @@
 package com.br.revisai.Model;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Usuario")
 public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String nome;
     private String email;
     private String senha;

@@ -1,7 +1,7 @@
 package com.br.revisai.Controller;
 
-import com.br.revisai.Model.Usuario;
-import com.br.revisai.Service.UsuarioService;
+import com.br.revisai.Model.Colecao;
+import com.br.revisai.Service.ColecaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,22 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Usuarios")
-public class UsuarioController {
-
-
-    //TODO: Fazer o outros metodos
+@RequestMapping("/Colecao")
+public class ColecaoController {
 
     @Autowired
-    UsuarioService service;
+    ColecaoService service;
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
-        service.save(usuario);
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<Colecao> create(@RequestBody Colecao colecao){
+        service.save(colecao);
+        return ResponseEntity.ok(colecao);
     }
-
-
-
-
 }

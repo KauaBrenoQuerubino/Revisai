@@ -1,7 +1,7 @@
 package com.br.revisai.Controller;
 
-import com.br.revisai.Model.Usuario;
-import com.br.revisai.Service.UsuarioService;
+import com.br.revisai.Model.Flashcard;
+import com.br.revisai.Service.FlashcardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,22 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Usuarios")
-public class UsuarioController {
-
-
-    //TODO: Fazer o outros metodos
+@RequestMapping("/Flashcard")
+public class FlashCardController{
 
     @Autowired
-    UsuarioService service;
+    FlashcardService service;
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
-        service.save(usuario);
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<Flashcard> create(@RequestBody Flashcard flashcard){
+        service.save(flashcard);
+        return ResponseEntity.ok(flashcard);
     }
-
-
-
-
 }

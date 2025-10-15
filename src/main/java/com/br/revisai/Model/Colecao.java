@@ -1,9 +1,24 @@
 package com.br.revisai.Model;
 
+
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "colecao")
 public class Colecao {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String nome;
-    private Usuario[] usuarios;
-    private Flashcard[] flashcards;
+
+//    private List<Usuario> usuarios;
+
+    @OneToMany(mappedBy = "colecao", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Flashcard> flashcards;
 
     public String getNome() {
         return nome;
@@ -13,19 +28,19 @@ public class Colecao {
         this.nome = nome;
     }
 
-    public Usuario[] getUsuarios() {
-        return usuarios;
-    }
+//    public List<Usuario> getUsuarios() {
+//        return usuarios;
+//    }
+//
+//    public void setUsuarios(List<Usuario> usuarios) {
+//        this.usuarios = usuarios;
+//    }
 
-    public void setUsuarios(Usuario[] usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public Flashcard[] getFlashcards() {
+    public List<Flashcard> getFlashcards() {
         return flashcards;
     }
 
-    public void setFlashcards(Flashcard[] flashcards) {
+    public void setFlashcards(List<Flashcard> flashcards) {
         this.flashcards = flashcards;
     }
 }

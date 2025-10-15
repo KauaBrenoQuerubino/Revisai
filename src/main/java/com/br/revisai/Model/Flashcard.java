@@ -1,11 +1,28 @@
 package com.br.revisai.Model;
 
-import java.util.HashMap;
+import jakarta.persistence.*;
 
+import java.util.HashMap;
+import java.util.List;
+
+@Entity
+@Table(name = "flashcard")
 public class Flashcard {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String nome;
     private String tema;
-    private HashMap<String, String> Perguntas;
+
+    @OneToMany(mappedBy = "flashcard", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pergunta> Perguntas;
+
+    @ManyToOne
+    @JoinColumn(name = "colecao_id")
+    private Colecao colecao;
+
 
     public String getNome() {
         return nome;
@@ -23,11 +40,19 @@ public class Flashcard {
         this.tema = tema;
     }
 
-    public HashMap<String, String> getPerguntas() {
+    public List<Pergunta> getPerguntas() {
         return Perguntas;
     }
 
-    public void setPerguntas(HashMap<String, String> perguntas) {
+    public void setPerguntas(List<Pergunta> perguntas) {
         Perguntas = perguntas;
+    }
+
+    public Colecao getColecao() {
+        return colecao;
+    }
+
+    public void setColecao(Colecao colecao) {
+        this.colecao = colecao;
     }
 }
