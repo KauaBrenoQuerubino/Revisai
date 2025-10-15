@@ -9,6 +9,14 @@ import java.util.List;
 @Table(name = "colecao")
 public class Colecao {
 
+    public Colecao() {}
+
+    public Colecao(int id, String nome, List<Flashcard> flashcards) {
+        this.id = id;
+        this.nome = nome;
+        this.flashcards = flashcards;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
