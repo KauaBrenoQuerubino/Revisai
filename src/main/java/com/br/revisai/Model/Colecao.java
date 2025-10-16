@@ -1,6 +1,7 @@
 package com.br.revisai.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -50,5 +51,14 @@ public class Colecao {
 
     public void setFlashcards(List<Flashcard> flashcards) {
         this.flashcards = flashcards;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,5 +1,7 @@
 package com.br.revisai.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.HashMap;
@@ -9,6 +11,16 @@ import java.util.List;
 @Table(name = "flashcard")
 public class Flashcard {
 
+    public Flashcard() {}
+
+    public Flashcard(int id, String nome, String tema, List<Pergunta> perguntas, Colecao colecao) {
+        this.id = id;
+        this.nome = nome;
+        this.tema = tema;
+        Perguntas = perguntas;
+        this.colecao = colecao;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,12 +29,21 @@ public class Flashcard {
     private String tema;
 
     @OneToMany(mappedBy = "flashcard", cascade = CascadeType.ALL, orphanRemoval = true)
+
     private List<Pergunta> Perguntas;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colecao_id")
+    @JsonIgnoreProperties("flashcards")
     private Colecao colecao;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

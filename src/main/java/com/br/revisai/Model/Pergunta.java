@@ -1,11 +1,23 @@
 package com.br.revisai.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "pergunta")
 public class Pergunta {
+
+    public Pergunta() {}
+
+    public Pergunta(String enunciado, String resposta, String dificuldade, Flashcard flashcard) {
+        this.enunciado = enunciado;
+        this.resposta = resposta;
+        this.dificuldade = dificuldade;
+        this.flashcard = flashcard;
+    }
+
     //TODO: Fazer o FK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +29,7 @@ public class Pergunta {
 
     @ManyToOne
     @JoinColumn(name = "flashcard_id")
+    @JsonIgnoreProperties("perguntas")
     private Flashcard flashcard;
 
     public int getId() {
