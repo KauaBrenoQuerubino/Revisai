@@ -24,7 +24,13 @@ public class Colecao {
 
     private String nome;
 
-//    private List<Usuario> usuarios;
+    @ManyToMany
+    @JoinTable(
+            name = "colecao_usuario",
+            joinColumns = @JoinColumn(name = "colecao_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id")
+    )
+    private List<Usuario> usuarios;
 
     @OneToMany(mappedBy = "colecao", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Flashcard> flashcards;
@@ -37,13 +43,13 @@ public class Colecao {
         this.nome = nome;
     }
 
-//    public List<Usuario> getUsuarios() {
-//        return usuarios;
-//    }
-//
-//    public void setUsuarios(List<Usuario> usuarios) {
-//        this.usuarios = usuarios;
-//    }
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
 
     public List<Flashcard> getFlashcards() {
         return flashcards;

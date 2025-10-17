@@ -3,6 +3,8 @@ package com.br.revisai.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Usuario")
 public class Usuario {
@@ -14,6 +16,9 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+
+    @ManyToMany(mappedBy = "usuarios")
+    private List<Colecao> colecoes;
 
     public int getId() {
         return id;
