@@ -13,12 +13,27 @@ public class Flashcard {
 
     public Flashcard() {}
 
-    public Flashcard(int id, String nome, String tema, List<Pergunta> perguntas, Colecao colecao) {
+    public Flashcard(int id, String nome, String tema, String enunciado, String resposta, String dificuldade, Colecao colecao) {
         this.id = id;
         this.nome = nome;
         this.tema = tema;
-        Perguntas = perguntas;
+        this.enunciado = enunciado;
+        this.resposta = resposta;
+        this.dificuldade = dificuldade;
         this.colecao = colecao;
+    }
+
+    @Override
+    public String toString() {
+        return "Flashcard{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", tema='" + tema + '\'' +
+                ", enunciado='" + enunciado + '\'' +
+                ", resposta='" + resposta + '\'' +
+                ", dificuldade='" + dificuldade + '\'' +
+                ", colecao=" + colecao +
+                '}';
     }
 
     @Id
@@ -28,9 +43,33 @@ public class Flashcard {
     private String nome;
     private String tema;
 
-    @OneToMany(mappedBy = "flashcard", cascade = CascadeType.ALL, orphanRemoval = true)
+    private String enunciado;
+    private String resposta;
+    private String dificuldade;
 
-    private List<Pergunta> Perguntas;
+    public String getEnunciado() {
+        return enunciado;
+    }
+
+    public void setEnunciado(String enunciado) {
+        this.enunciado = enunciado;
+    }
+
+    public String getResposta() {
+        return resposta;
+    }
+
+    public void setResposta(String resposta) {
+        this.resposta = resposta;
+    }
+
+    public String getDificuldade() {
+        return dificuldade;
+    }
+
+    public void setDificuldade(String dificuldade) {
+        this.dificuldade = dificuldade;
+    }
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colecao_id")
@@ -59,14 +98,6 @@ public class Flashcard {
 
     public void setTema(String tema) {
         this.tema = tema;
-    }
-
-    public List<Pergunta> getPerguntas() {
-        return Perguntas;
-    }
-
-    public void setPerguntas(List<Pergunta> perguntas) {
-        Perguntas = perguntas;
     }
 
     public Colecao getColecao() {

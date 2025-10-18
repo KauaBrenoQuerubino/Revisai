@@ -1,6 +1,7 @@
 package com.br.revisai.Service;
 
 import com.br.revisai.Model.Colecao;
+import com.br.revisai.Model.Usuario;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ public interface ColecaoService extends CrudRepository<Colecao, Integer> {
     Colecao save(Colecao entity);
 
     Optional<Colecao> findById(Integer integer);
+
+    List<Colecao> findByUsuarios_Id(Integer id);
 
     List<Colecao> findAll();
 

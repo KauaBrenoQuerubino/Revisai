@@ -59,7 +59,6 @@ public class Colecao {
         this.flashcards = flashcards;
     }
 
-
     public int getId() {
         return id;
     }

@@ -6,13 +6,12 @@ import com.br.revisai.Service.ColecaoService;
 import com.br.revisai.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/Colecao")
 public class ColecaoController {
@@ -38,4 +37,20 @@ public class ColecaoController {
         service.save(colecao);
         return ResponseEntity.ok(colecao);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> create(@PathVariable Integer id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        if (usuario == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        List<Colecao> colecoes = service.findByUsuarios_Id(id);
+
+        return ResponseEntity.ok(colecoes);
+
+    }
+
+
+
 }

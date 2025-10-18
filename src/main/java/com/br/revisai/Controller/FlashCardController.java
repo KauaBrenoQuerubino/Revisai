@@ -6,11 +6,9 @@ import com.br.revisai.Service.ColecaoService;
 import com.br.revisai.Service.FlashcardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/Flashcard")
 public class FlashCardController{
@@ -25,6 +23,7 @@ public class FlashCardController{
     @PostMapping
     public ResponseEntity<Flashcard> create(@RequestBody Flashcard flashcard){
         if (flashcard.getColecao() == null || flashcard.getColecao().getId() == 0) {
+            System.out.println(flashcard.toString());
             return ResponseEntity.badRequest().build();
         }
 
