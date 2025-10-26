@@ -2,6 +2,7 @@ package com.br.revisai.Controller.Auth;
 
 
 import com.br.revisai.Model.DTO.LoginDTO;
+import com.br.revisai.Model.DTO.TokenDTO;
 import com.br.revisai.Model.Usuario;
 import com.br.revisai.Service.Token.JWTservice;
 import com.br.revisai.Service.UsuarioService;
@@ -40,7 +41,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) throws ExecutionException, InterruptedException {
 
-
+        System.out.println("teste");
         Optional<Usuario> usuario = service.findByEmail(loginDTO.getEmail());
 
         Map<String, Object> resposta = new HashMap<>();
@@ -56,13 +57,13 @@ public class AuthController {
         }
 
         resposta.put("mensagem", "Error ao efetuar o Login");
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(resposta);
     }
 
     @PostMapping(value = "/sessao")
-    public ResponseEntity<?> sessao (@RequestBody String token) throws InterruptedException, ExecutionException{
+    public ResponseEntity<?> sessao (@RequestBody TokenDTO dto) throws InterruptedException, ExecutionException{
 
-        String uid = tokenjwt.validarToken(token);
+        String uid = tokenjwt.validarToken(dto.getToken());
         System.out.println(uid);
         Optional<Usuario> usuario = service.findByEmail(uid);
 

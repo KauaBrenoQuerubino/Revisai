@@ -15,33 +15,16 @@ public class Flashcard {
 
     public Flashcard(int id, String nome, String tema, String enunciado, String resposta, String dificuldade, Colecao colecao) {
         this.id = id;
-        this.nome = nome;
-        this.tema = tema;
         this.enunciado = enunciado;
         this.resposta = resposta;
         this.dificuldade = dificuldade;
         this.colecao = colecao;
     }
 
-    @Override
-    public String toString() {
-        return "Flashcard{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", tema='" + tema + '\'' +
-                ", enunciado='" + enunciado + '\'' +
-                ", resposta='" + resposta + '\'' +
-                ", dificuldade='" + dificuldade + '\'' +
-                ", colecao=" + colecao +
-                '}';
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private String nome;
-    private String tema;
 
     private String enunciado;
     private String resposta;
@@ -84,21 +67,6 @@ public class Flashcard {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getTema() {
-        return tema;
-    }
-
-    public void setTema(String tema) {
-        this.tema = tema;
-    }
 
     public Colecao getColecao() {
         return colecao;

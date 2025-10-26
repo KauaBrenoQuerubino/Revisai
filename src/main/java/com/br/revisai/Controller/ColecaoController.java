@@ -38,14 +38,23 @@ public class ColecaoController {
         return ResponseEntity.ok(colecao);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> create(@PathVariable Integer id) {
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> procurarUsuario(@PathVariable Integer id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario == null){
             return ResponseEntity.notFound().build();
         }
 
         List<Colecao> colecoes = service.findByUsuarios_Id(id);
+
+        return ResponseEntity.ok(colecoes);
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> procurarColecao(@PathVariable Integer id) {
+
+        Optional<Colecao> colecoes = service.findById(id);
 
         return ResponseEntity.ok(colecoes);
 
