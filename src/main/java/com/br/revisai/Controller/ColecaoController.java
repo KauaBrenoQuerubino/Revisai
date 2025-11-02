@@ -60,6 +60,19 @@ public class ColecaoController {
 
     }
 
+    @DeleteMapping("/{id}")
+    public void deletarColecao(@PathVariable Integer id) {
+        Colecao colecao = service.findById(id)
+                .orElseThrow(() -> new RuntimeException("Coleção não encontrada"));
+
+        // Remove os vínculos com usuários
+        colecao.getUsuarios().clear();
+        service.save(colecao); // garante que o Hibernate remova os vínculos na tabela colecao_usuario
+
+        // Agora é seguro deletar
+        service.delete(colecao);
+    }
+
+    }
 
 
-}
